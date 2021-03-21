@@ -1,0 +1,280 @@
+<style>
+.list {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 20px;
+}
+.list div {
+  cursor: pointer;
+  padding: 5px 20px;
+}
+.list div.selected {
+  background: #ffb1b1;
+}
+.list input {
+  padding: 20px 0;
+  width: 120px;
+}
+#schema {
+  position: relative;
+  width: 1px;
+  height: 1px;
+  top: 100px;
+  left: 400px;
+}
+
+#schema div {
+  width: inherit;
+  height: inherit;
+  position: absolute;
+}
+
+#schema div.animate {
+  transition: margin 0.5s;
+}
+
+#schema .selected {
+  z-index: 50;
+}
+
+#schema img {
+  position: absolute;
+  cursor: pointer;
+}
+#schema img.selected {
+  display: none;
+}
+#schema .selected img {
+  display: none;
+}
+#schema .selected img.selected {
+  display: block;
+}
+
+#schema .i1 img {
+  left: 30px;
+  top: -2px;
+  z-index: 5;
+}
+#schema .i1.c2 img {
+  z-index: 7;
+}
+#schema .i2 img {
+  left: -8px;
+  top: 5px;
+  z-index: 7;
+}
+#schema .i3 img {
+  left: 0;
+  top: 0;
+  z-index: 9;
+}
+#schema .i4 img {
+  left: 90px;
+  top: 31px;
+  z-index: 7;
+}
+#schema .i4.c2 img {
+  z-index: 10;
+}
+#schema .i5 img {
+  left: 150px;
+  top: 72px;
+  z-index: 11;
+}
+#schema .i6 img {
+  left: 15px;
+  top: 163px;
+  z-index: 4;
+}
+#schema .i7 img {
+  top: 62px;
+  left: 54px;
+  z-index: 9;
+}
+#schema .i8 img {
+  top: 12px;
+  left: 21px;
+  z-index: 6;
+}
+#schema .i8.c2 img {
+  z-index: 10;
+}
+</style>
+
+<div class="list">
+  <div class="i1"data-item="1">item 1</div>
+  <div class="i2"data-item="2">item 2</div>
+  <div class="i3"data-item="3">item 3</div>
+  <div class="i4"data-item="4">item 4</div>
+  <div class="i5"data-item="5">item 5</div>
+  <div class="i6"data-item="6">item 6</div>
+  <div class="i7"data-item="7">item 7</div>
+  <div class="i8"data-item="8">item 8</div>
+  <br />  
+  <input type="button" class="out" value="Развернуть">
+  <input type="button" class="in" style="display:none" value="Свернуть">
+</div>
+
+<div id="schema">
+  <div class="d0 i2" data-item="2">
+    <img src="s2.png">
+    <img src="s2_sel.png" class="selected">
+  </div>
+  <div class="xa d1 i8" data-item="8">
+    <img src="s8.png">
+    <img src="s8_sel.png" class="selected">
+  </div>
+  <div class="xa d1 i8 c2" data-item="8">
+    <img src="s8_2.png">
+    <img src="s8_2_sel.png" class="selected">
+  </div>
+  <div class="xa d2 i3" data-item="3">
+    <img src="s3.png">
+    <img src="s3_sel.png" class="selected">
+  </div>
+  <div class="xa d3 i7" data-item="7">
+    <img src="s7.png">
+    <img src="s7_sel.png" class="selected">
+  </div>
+  <div class="xa d4"></div>
+  <div class="xb d4"></div>
+  <div class="xb d3"></div>
+  <div class="xb d2"></div>
+  <div class="xb d1 i1" data-item="1">
+    <img src="s1.png">
+    <img src="s1_sel.png" class="selected">
+  </div>
+  <div class="xb d1 i1 c2" data-item="1">
+    <img src="s1_2.png">
+    <img src="s1_2_sel.png" class="selected">
+  </div>
+  <div class="ya d1 i4" data-item="4">
+    <img src="s4.png">
+    <img src="s4_sel.png" class="selected">
+  </div>
+  <div class="ya d1 i4 c2" data-item="4">
+    <img src="s4_2.png">
+    <img src="s4_2_sel.png" class="selected">
+  </div>
+  <div class="ya d2 i5" data-item="5">
+    <img src="s5.png">
+    <img src="s5_sel.png" class="selected">
+  </div>
+  <div class="ya d3"></div>
+  <div class="ya d4"></div>
+  <div class="yb d4"></div>
+  <div class="yb d3"></div>
+  <div class="yb d2"></div>
+  <div class="yb d1"></div>
+  <div class="za d1"></div>
+  <div class="za d2"></div>
+  <div class="za d3"></div>
+  <div class="za d4"></div>
+  <div class="zb d4"></div>
+  <div class="zb d3"></div>
+  <div class="zb d2"></div>
+  <div class="zb d1 i6" data-item="6">
+    <img src="s6.png">
+    <img src="s6_sel.png" class="selected">
+  </div>
+</div>
+
+<script
+  src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+  integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI="
+  crossorigin="anonymous"></script>
+<script>
+
+var selected = null;
+$(function(){
+  $(".list .out").on("click", function(){
+    animate(-1000);
+  })
+  $(".list .in").on("click", function(){
+    animate(0);
+  })
+
+  $("#schema div img").on("click", function(){
+    unselect();
+
+    var lay = $(this).parent();
+
+    if (selected == lay.data("item")) {
+      selected = null;
+      return;
+    }
+    lay.addClass("selected");
+    $(".i" + lay.data("item")).addClass("selected");
+    selected = lay.data("item");
+  });
+
+  $(".list div").on("click", function(){
+    if ($(this).hasClass("selected")) {
+      unselect();
+      return;
+    } else {
+      unselect();
+      $(this).addClass("selected");
+      $("#schema [data-item=" + $(this).data("item") + "]").addClass("selected");
+    }
+  });
+})
+
+function unselect(){
+  $("#schema div").removeClass("selected");
+  $(".list div").removeClass("selected");
+}
+
+var delta = 0;
+
+$(document).on("wheel", function(e){
+  var d = e.originalEvent.deltaY || e.originalEvent.detail || e.originalEvent.wheelDelta;
+
+  delta += d;
+
+  if (delta > 0) {
+      delta = 0;
+  } else if (delta < -1000) {
+    delta = -1000;
+  }
+
+  if (d > 0) {
+    $(".list .in").hide();
+    $(".list .out").show();
+  } else {
+    $(".list .out").hide();
+    $(".list .in").show();
+  }
+
+  move(delta);
+});
+
+function animate(d){
+  $("#schema div").addClass("animate")
+  $(".list input[type=button]").attr("disabled", true);
+  setTimeout(function() {
+    $("#schema div").removeClass("animate");
+    delta = d;
+    $(".list input[type=button]").toggle();
+    $(".list input[type=button]").attr("disabled", false);
+  }, 500);
+  move(d);
+}
+
+var kx = 4;
+var ky = 2;
+
+function move(d) {
+  for(i = 1; i <= 4; i++) {
+    f = d * i / 10;
+    $('.xa.d'+ i).css('margin-top', -f/kx).css('margin-left', f);
+    $('.xb.d' + i).css('margin-top', f/kx).css('margin-left', -f);
+    $('.ya.d' + i).css('margin-top', -f/ky).css('margin-left', -f);
+    $('.yb.d' + i).css('margin-top', f/ky).css('margin-left', f);
+    $('.za.d' + i).css('margin-top', f);
+    $('.zb.d' + i).css('margin-top', -f);
+  }
+}
+</script>
